@@ -8,62 +8,55 @@ _handle=int(sys.argv[1]) #当前句柄
 _pluginurl = sys.argv[0] #当前地址 plugin.video.video/
 _url = sys.argv[2] #取地址?号后面的
 _site = 'http://www.haoav59.com'
-_site_18 = False
-close_keyword = '幼女,儿童'
-_site_close_keyword = close_keyword.decode('utf-8')
+_site_encoding = 'gb2312'
+_black_words = u'幼女,儿童,学生,未成年'
 
 print('malimaliao:(' + str(_handle) + ')' + _pluginurl)
 
 UA_head = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36',
-    'referer': 'http://www.haoav53.com',
+    'referer': 'http://www.haoav59.com',
 }
 
 # 【获取频道栏目列表】
 def load_typelist(dianying_url):
     print('TO HOME URL:' + dianying_url)
-    ziyuan = requests.get(dianying_url, headers=UA_head)
-    htmlcode = ziyuan.text
-    id_html = re.search(r'width1200">\s*<ul>[\s\S]*?</ul>', htmlcode)  # 提取局部html(电影分类列表)
-    if id_html:
-        htmlcode_html = id_html.group()
-        GZ_type = re.compile(r'<a.href="(.+?.html)".*?>(.+?)</a>')  # 栏目规则
-        types = GZ_type.findall(htmlcode_html)
-        if len(types) > 0:
-            for type in types:
-                type_name = type[1]
-                # KODI代码嵌入开始
-                kodi_typeurl= '?koditype=' + type[0] #因为源站点不包含?，而插件地址必须包含?，此处强制赋值一个？
-                print(kodi_typeurl)
-                if _site_18 == True:
-                    if type_name in _site_close_keyword:
-                        continue  # 跳过
-                    else:
-                        listitem = xbmcgui.ListItem(type_name)
-                        xbmcplugin.addDirectoryItem(_handle, _pluginurl + kodi_typeurl, listitem, True)
-                else:
-                    listitem = xbmcgui.ListItem(type_name)
-                    xbmcplugin.addDirectoryItem(_handle, _pluginurl + kodi_typeurl, listitem, True)
-                # KODI代码嵌入完毕
-        else:
-            print('暂无电影分类列表提供')
+    res = requests.get(dianying_url, headers=UA_head)
+    res.encoding = _site_encoding
+    html_code = res.text
+    gz = re.compile(r'<li><a.href="?(.+?).html"?>(.+?)</a></li>')
+    types = gz.findall(html_code)
+    if len(types) > 0:
+        for type in types:
+            type_name = type[1]
+            # KODI代码嵌入开始
+            #因为源站点不包含?，而插件地址必须包含?，构造kodi识别的?koditype=/list/index29
+            kodi_typeurl= '?koditype=' + type[0] + '.html'
+            print(kodi_typeurl)
+            if type_name in _black_words:
+                continue
+            else:
+                listitem = xbmcgui.ListItem(type_name)
+                xbmcplugin.addDirectoryItem(_handle, _pluginurl + kodi_typeurl, listitem, True)
+            # KODI代码嵌入完毕
     else:
         print('无法获取电影分类列表')
 # 【获取栏目电影列表】
 def load_videolist(dianying_type_url):
     print('TO URL:'+dianying_type_url)
     res = requests.get(dianying_type_url, headers=UA_head)
+    res.encoding = _site_encoding
     htmlcode = res.text
-    #print(htmlcode)
-    GZ_videos = re.compile(r'href="(.+?)"><img.+>(.+?)</a>')
+    GZ_videos = re.compile(r'<a.href="(.+?)".class="pic".+<img.src="(.+?)".+</a>\s*<a.+txt.+>(.+?)</a>')
     videos = GZ_videos.findall(htmlcode)
     if len(videos) > 0:
         for video in videos:
-            #print video
-            kodi_vurl = '?kodivideo=' + video[0] #kodi菜单传递后_url获取的则是?之后的内容
-            v_title = video[1]
+            # kodi菜单传递后_url获取的则是?之后的内容
+            kodi_vurl = '?kodivideo=' + video[0]
+            v_image = video[1]
+            v_title = video[2]
             #KODI代码嵌入开始
-            listitem=xbmcgui.ListItem(v_title)
+            listitem=xbmcgui.ListItem(v_title, iconImage=v_image, thumbnailImage=v_image)
             xbmcplugin.addDirectoryItem(_handle, _pluginurl + kodi_vurl, listitem, True)
             #KODI代码嵌入完毕
     else:
@@ -74,30 +67,29 @@ def load_videoinfo(dianying_detail_url):
     print('TO VIDEO URL:'+dianying_detail_url)
     videoinfo = {}
     res = requests.get(dianying_detail_url, headers=UA_head)
+    res.encoding = _site_encoding
     htmlcode_info = res.text
-    #print(htmlcode_info)
-    #playimg
-    GZ_images = re.compile(r'class="left">\s*<img.src="(.+?)"')
-    images = GZ_images.findall(htmlcode_info)
-    if len(images) > 0:
-        for img in images:
-            videoinfo['image'] = img
+    #play title
+    gz_title = re.compile(r'T2">(.+?)<div')
+    ts = gz_title.findall(htmlcode_info)
+    if len(ts) > 0:
+        for t in ts:
+            videoinfo['title'] = t
     else:
-        videoinfo['image'] = ''
+        videoinfo['title'] = u'资源播放'
     #playlist
-    GZ_playlists = re.compile(r'>(.+?).m3u8<')
+    GZ_playlists = re.compile(r'video=\["(.+?)->video')
     playlists = GZ_playlists.findall(htmlcode_info)
     if len(playlists) > 0:
         playurllist = {}
-        i=0
+        i = 0
         for play in playlists:
-            print('m3u8:' + play + '.m3u8')
-            print('m3u8_0:' + play[0] + '.m3u8')
+            print('mp4:' + play)
+            print('mp40:' + play[0])
             #当正则子匹配只需要1个的时候，在for循环里不要加[0]索引
             i = i + 1
-            play_title = 'Play' + str(i)
-            play_m3u8 = play + '.m3u8'
-            playurllist[play_title] = play_m3u8
+            play_title = 'play:' + str(i)
+            playurllist[play_title] = play
         print(playurllist)
         videoinfo['playlist'] = playurllist
     else:
@@ -118,7 +110,7 @@ if 'koditype=' in _url:
     gourls = GZ_type.findall(_gourl)
     if len(gourls) > 0:
         for gourl in gourls:
-            load_videolist( _site + gourl )
+            load_videolist(_site + gourl)
     else:
         print('无法提取koditype')
 
@@ -131,12 +123,13 @@ if 'kodivideo=' in _url:
     if len(vids) > 0:
         for vid_url in vids:
             #载入指定vid的视频信息
-            videodata = load_videoinfo( _site + vid_url)
-            movie_image = videodata['image']
+            vid_url = vid_url.replace('/view/', '/player/')
+            videodata = load_videoinfo(_site + vid_url)
+            movie_title = videodata['title']
             movie_playlist = videodata['playlist']
             for playurl in videodata['playlist'].items():
                 print(playurl[0] + playurl[1])
-                listitem = xbmcgui.ListItem(playurl[0],thumbnailImage=movie_image)
+                listitem = xbmcgui.ListItem(movie_title + playurl[0])
                 xbmcplugin.addDirectoryItem(_handle, playurl[1], listitem, False)
     else:
         print('无法提取kodivideo')
