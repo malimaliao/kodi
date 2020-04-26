@@ -8,10 +8,10 @@
 
 =========================   
 
-![截图1](/resources/p1.jpg)
+![截图1](./resources/p1.jpg)
 
-![截图1](/resources/p2.jpg)
+![截图1](./resources/p2.jpg)
 
-![截图1](/resources/p3.jpg)
+![截图1](./resources/p3.jpg)
 
-![截图1](/resources/p4.jpg)
+![截图1](./resources/p4.jpg)
