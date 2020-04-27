@@ -13,9 +13,7 @@ _plugin_address =sys.argv[0]
 _wh_url =sys.argv[2]
 # 接口域名
 _site ='http://www.hanju.cc'
-# 不良内容屏蔽开关
-_site_18 = True
-# 不良内容关键词黑名单
+_site_18 = False
 _close_keyword = '伦理片,操'
 _encoding = 'gb2312'
 print('爬虫调试_cj:' + str(_handle))
@@ -67,8 +65,10 @@ def load_list(type_url):
             v_title = video[2]
             v_note = video[3]
             v_name = v_title + '(' + v_note + ')'
-            #KODI代码嵌入开始
-            listitem=xbmcgui.ListItem(v_name, iconImage=v_images, thumbnailImage=v_images)
+            #KODI代码嵌入开始 thumbnailImage=v_images用法在19版本改变
+            listitem = xbmcgui.ListItem(v_name)
+            #在kodi 19中更改为下面这个图标设置方法
+            listitem.setArt({'thumb': v_images}) #kodi 19+
             xbmcplugin.addDirectoryItem(_handle, _plugin_address + v_url, listitem, True)
             #KODI代码嵌入完毕
     else:
