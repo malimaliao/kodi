@@ -28,48 +28,6 @@ def check_json(input_str):
     except:
         return False
 
-# 【获取推荐】
-def Bot_load_menu():
-    url = Site_url + '/'
-    res = requests.get(url, headers=UA_head)
-    code = res.text
-    re_z = re.compile(r'<li><a.href=./hanju/(.*?).>(.*?)</a>')  # 正则
-    types = re_z.findall(code)
-    if len(types) > 0:
-        for type in types:
-            # 构造带问号的kodi专属插件url地址，便于识别，?kodi_type=/type1001.html
-            type_url = '?kodi_type=' + type[0]
-            type_name = type[1]
-            # KODI代码嵌入开始
-            listitem = xbmcgui.ListItem(type_name)
-            xbmcplugin.addDirectoryItem(_plugin_handle, _plugin_address + type_url, listitem, True)
-            # KODI代码嵌入完毕
-    else:
-        print('duola_debug:暂无电影分类列表提供')
-
-
-    # python2中遍历字典时键值对返回的顺序与存储顺序不同，而python3.6+则更改了字典算法会自动按照存储顺序排序，因此此处定义字典为OrderedDict对象
-    play_list = OrderedDict()
-    url = Site_url + urllib.parse.unquote(detail_url)
-    res1 = requests.get(url, headers=UA_head)
-    res1.encoding = Site_encoding
-    text = res1.text
-    text2 = re.search(r'<ul.class="stui-content__playlist.clearfix".+?</ul>', text)
-    play_text = text2.group()
-    gz1 = re.compile(r'<li.><a.href="(.+?)">(.+?)</a>\s*</li>')
-    p_lists = gz1.findall(play_text)
-    if len(p_lists) > 0:
-        for v_card in p_lists:
-            # 提取播放名称，此处为中文，会被系统转换为unicode存储
-            v_play_title = v_card[1] + u'[COLOR yellow]【播放地址】[/COLOR]'
-            # 构造kodi视频播放地址 ?kodi_play=/video_play/174362/7.html
-            v_play_url = '?kodi_play=' + v_card[0]
-            play_list[v_play_title] = v_play_url
-    else:
-        print('duola_debug:本视频暂无播放地址')
-        play_list.clear()
-    return play_list
-
 # 搜索视频
 def Bot_load_search(keyword):
     so_url = Site_url + keyword + '&s1ig=11400&g='
@@ -89,7 +47,7 @@ def Bot_load_search(keyword):
                         # list_item.setArt({'thumb': '123.JPG'})
                         # list_item.setInfo('video', {'year': vod['year'], 'title':vod['name'], 'episodeguide': play['name'], 'tracknumber': i})
                         xbmcplugin.addDirectoryItem(_plugin_handle, play['url'], list_item, False)
-                    xbmcplugin.endOfDirectory(handle=_plugin_handle, succeeded=True, updateListing=False, cacheToDisc=True)
+                # xbmcplugin.endOfDirectory(handle=_plugin_handle, succeeded=True, updateListing=False, cacheToDisc=True)
             else:
                 print('duola_debug:找不到播放地址')
                 _plugin_dialog.notification(heading=_plugin_name, message='抱歉，找不到播放列表', time=3000)
