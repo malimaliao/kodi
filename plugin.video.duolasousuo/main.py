@@ -13,6 +13,7 @@ _plugin_handle = int(sys.argv[1])  # 当前句柄
 _plugin_address = sys.argv[0]  # 当前插件地址
 _plugin_parm = sys.argv[2]  # 问号以后的内容
 _plugin_dialog = xbmcgui.Dialog()
+_plugin_player_style = 3
 print('duola_debug:[' + str(_plugin_handle)+']'+ _plugin_address+' || '+ _plugin_parm)
 
 # bot config
@@ -85,8 +86,7 @@ def Web_load_detail_one_style1(detail):
                 v_remarks = video['vod_remarks']
                 v_typename = video['type_name']
                 v_picture = video['vod_pic']
-                # 第1集$https://v.qq.com/x/1.mp4#第2集$https://v.qq.com/x/2.mp4#第3集$https://v.qq.com/x/3.mp4
-                v_list_text = video['vod_play_url'] 
+                v_list_text = video['vod_play_url'] # 多地址合集
                 v_infos = {}
                 try:
                     v_infos['title'] = video['vod_name']
@@ -102,123 +102,67 @@ def Web_load_detail_one_style1(detail):
                 except IndexError as e:
                     pass
                 # dialog.select
+                V_name_list = []
+                V_m3u8_list = []
                 playlist = xbmc.PlayList(xbmc.PLAYLIST_VIDEO)
-                V_name_list = []
-                V_m3u8_list = []
-                GZ_v = re.compile(r'(.+?)\$(.+?)#')
-                play_list = GZ_v.findall(v_list_text)
-                if len(play_list) > 0:
+                # 按$$$分隔不同的[播放来源]数据
+                # 第01集$http://abc.com/1.mp4#第02集$http://abc.com/2.mp4$$$第01集$http://abc.com/1.flv#第02集$http://abc.com/2.flv
+                V_class_data = v_list_text.split('$$$')
+                if len(V_class_data) > 0:
                     select_title = v_name + ':请选择播放源开始播放'
-                    i = 0
-                    for play in play_list:
-                        if check_url_mime(play[1]):
-                            V_name_list.append(play[0]) # 播放标签
-                            V_m3u8_list.append(play[1]) # 播放地址
-                            # listitem
-                            list_item = xbmcgui.ListItem(v_name + ':' + play[0], v_typename)
-                            list_item.setArt({'thumb': v_picture, 'poster': v_picture})
-                            list_item.setInfo('video', v_infos)
-                            playlist.add(url=play[1], listitem=list_item, index=i)
-                            i = i +1
-                        else:
-                            pass # 不符合条件的播放地址跳过
+                    for V_list in V_class_data:
+                        # 按#分隔相同的[播放来源]数据中的不同[播放地址/剧集]
+                        # 第01集$http://abc.com/1.flv#第02集$http://abc.com/2.flv
+                        V_playlist = V_list.split('#')
+                        V_i = 0
+                        for V_play in V_playlist:
+                            # 按#分隔，将vod_title与vod_url区分
+                            # 第01集$http://abc.com/1.flv
+                            V = V_play.split('$')
+                            if check_url_mime(V[1]):
+                                V_name_list.append(V[0]) # 播放标签
+                                V_m3u8_list.append(V[1]) # 播放地址
+                                # listitem
+                                list_item = xbmcgui.ListItem(v_name + ':' + V[0], v_typename)
+                                list_item.setArt({'thumb': v_picture, 'poster': v_picture})
+                                list_item.setInfo('video', v_infos)
+                                playlist.add(url= V[1], listitem=list_item, index=V_i)
+                                V_i = V_i +1
+                            else:
+                                pass # 不符合条件的播放地址跳过
                 else:
                    select_title = '此视频暂时没有播放源'
-                # 生成 select
-                dialog = xbmcgui.Dialog()
-                select_i = dialog.select(select_title, V_name_list)
-                print('duola_debug: select_i '+str(select_i))
-                if select_i >= 0:
-                    # 立即播放单个
-                    # xbmc.Player().play(item=V_m3u8_list[select_i], listitem=list_item)
-                    # 立即播放列表
-                    xbmc.Player().play(item=playlist, listitem=list_item, windowed=False, startpos=select_i)
-                    _plugin_dialog.notification(
-                        heading = _plugin_name, 
-                        message = v_name + ':' + V_name_list[select_i] + ' 即将自动播放，请稍候', 
-                        time=5000, 
-                        sound=False
-                    )
-            else:
-                print('duola_debug:没有数据')
-                _plugin_dialog.notification(heading=_plugin_name, message='抱歉，找不到播放列表', time=3000)
-        else:
-            print('duola_debug:无法解析json')
-            _plugin_dialog.notification(heading=_plugin_name, message='抱歉，由于无法解析返回的数据，服务暂时不可用，请稍后重试', time=3000)
-    else:
-        print('duola_debug:目标服务器返回的数据无法解析')
-        _plugin_dialog.notification(heading=_plugin_name, message='抱歉，目标服务器返回的数据无法响应，服务暂不可用', time=3000)
-
-# 视频内容：返回单个视频详情，并交互输出select play list
-def Web_load_detail_one_style2(detail):
-    to_url = Site_api_detail + detail
-    res = requests.get(url=to_url,headers=UA_head)
-    # print('dula_debug:'+to_url, res.text)
-    if check_json(res.text):
-        res_json = json.loads(res.text)
-        if res_json['code'] == 1:
-            if len(res_json['list']) > 0:
-                video = res_json['list'][0] # 仅提取一个
-                v_id = str(video['vod_id'])
-                v_name = '[COLOR yellow]' + video['vod_name'] + '[/COLOR] '
-                v_remarks = video['vod_remarks']
-                v_typename = video['type_name']
-                v_picture = video['vod_pic']
-                # 第1集$https://v.qq.com/x/1.mp4#第2集$https://v.qq.com/x/2.mp4#第3集$https://v.qq.com/x/3.mp4
-                v_list_text = video['vod_play_url'] 
-                v_infos = {}
-                try:
-                    v_infos['title'] = video['vod_name']
-                    v_infos['originaltitle'] = video['vod_name']
-                    v_infos['tag'] = video['vod_remarks']
-                    v_infos['status'] = 'n/a'
-                    v_infos['country'] = video['vod_area']
-                    v_infos['year'] = video['vod_year']
-                    v_infos['director'] = video['vod_director']
-                    v_infos['cast'] = video['vod_actor'].split(',')
-                    v_infos['plot'] = video['vod_content']
-                    v_infos['rating'] = float(video['vod_score'])
-                except IndexError as e:
-                    pass
-                # A方案：dialog
-                V_name_list = []
-                V_m3u8_list = []
-                GZ_v = re.compile(r'(.+?)\$(.+?)#')
-                play_list = GZ_v.findall(v_list_text)
-                if len(play_list) > 0:
-                    select_title = v_name + ':请选择播放源开始播放'
-                    for play in play_list:
-                        if check_url_mime(play[1]):
-                            V_name_list.append(play[0]) # 播放标签
-                            V_m3u8_list.append(play[1]) # 播放地址
-                        else:
-                            pass # 不符合条件的播放地址跳过
-                else:
-                   select_title = '此视频暂时没有播放源'
-                dialog = xbmcgui.Dialog()
-                select_i = dialog.select(select_title, V_name_list)
-                # 生成 select list
-                print('duola_debug: select_i '+str(select_i))
-                if select_i >= 0:
-                    list_item = xbmcgui.ListItem(v_name, v_typename, V_m3u8_list[select_i], offscreen=False)
-                    list_item.setArt({'thumb': v_picture, 'poster': v_picture})
-                    list_item.setInfo('video', v_infos)
-                    #_plugin_dialog.info(list_item) # 显示视频信息，含播放按钮
-                    xbmc.Player().play(item=V_m3u8_list[select_i], listitem=list_item) # 立即播放
-                    _plugin_dialog.notification(
-                        heading = _plugin_name, 
-                        message = v_name + ':' + V_name_list[select_i] + ' 即将自动播放，请稍候', 
-                        time = 5000, 
-                        sound = False
-                    )
-                # B方案：Directory
-                # list_item = xbmcgui.ListItem(v_name+' (' + v_remarks+' / ' + v_typename + ')')
-                # list_item.setArt({'thumb': v_picture})
-                # list_item.setInfo('video', v_infos)
-                # 建立目录菜单
-                # xbmcplugin.addDirectoryItem(_plugin_handle, _plugin_address+'?kodi_test=123', list_item, True)
-                # 退出目录菜单 布局
-                # xbmcplugin.endOfDirectory(handle=_plugin_handle, succeeded=True, updateListing=False, cacheToDisc=True)
+                # 播放方式
+                # player_style -------------------------------------------------
+                if _plugin_player_style == 1:
+                    a = -1
+                    for x in V_name_list:
+                        a = a + 1
+                        list_item = xbmcgui.ListItem(v_name + ' (' + V_name_list[a] +')' )
+                        list_item.setArt({'thumb': v_picture, 'poster': v_picture})
+                        list_item.setInfo('video', v_infos)
+                        xbmcplugin.addDirectoryItem(_plugin_handle, V_m3u8_list[a] , list_item, False)
+                    xbmcplugin.endOfDirectory(handle=_plugin_handle, succeeded=True, updateListing=False, cacheToDisc=True)
+                # player_style -------------------------------------------------
+                if _plugin_player_style == 2:
+                    dialog = xbmcgui.Dialog()
+                    select_i = dialog.select(select_title, V_name_list)
+                    print('duola_debug: select_i '+str(select_i))
+                    if select_i >= 0:
+                        list_item = xbmcgui.ListItem(v_name, v_typename, V_m3u8_list[select_i], offscreen=False)
+                        list_item.setArt({'thumb': v_picture, 'poster': v_picture})
+                        list_item.setInfo('video', v_infos)
+                        #_plugin_dialog.info(list_item) # 显示视频信息，含播放按钮
+                        xbmc.Player().play(item=V_m3u8_list[select_i], listitem=list_item) # 立即播放视频
+                        _plugin_dialog.notification(heading=_plugin_name,message = v_name + ':' + V_name_list[select_i] + ' 即将自动播放，请稍候', time=5000, sound=False)
+                # player_style -------------------------------------------------
+                if _plugin_player_style == 3:
+                    dialog = xbmcgui.Dialog()
+                    select_i = dialog.select(select_title, V_name_list)
+                    print('duola_debug: select_i '+str(select_i))
+                    if select_i >= 0:
+                        xbmc.Player().play(item=playlist, listitem=list_item, windowed=False, startpos=select_i) # 立即播放列表
+                        _plugin_dialog.notification(heading = _plugin_name,message = v_name + ':' + V_name_list[select_i] + ' 即将自动播放，请稍候',time=5000,sound=False)
             else:
                 print('duola_debug:没有数据')
                 _plugin_dialog.notification(heading=_plugin_name, message='抱歉，找不到播放列表', time=3000)
@@ -261,6 +205,10 @@ if _plugin_parm == '':
 if '?kodi_search=yes' in _plugin_parm:
     print('duola_debug:' + _plugin_parm)
     kodi_start_search()
+
+# 当前路由> 访问帮助
+if '?kodi_help' in _plugin_parm:
+    _plugin_dialog.ok(_plugin_name + '使用帮助', '您只要输入您想搜索的资源关键词就可以啦')
 
 # 当前路由> 访问视频详情
 if '?kodi_detail=' in _plugin_parm:
