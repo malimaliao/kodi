@@ -216,5 +216,5 @@ if '?kodi_detail=' in _plugin_parm:
     if detail != "":
         this_list = Web_load_detail_one_style1(detail)
     else:
-        print('maliao_debug:传入的kodi_detail地址为空')
+        print('duola_debug:传入的kodi_detail地址为空')
         _plugin_dialog.notification(heading=_plugin_name, message='此视频信息无效，无法访问此视频', time=3000)
