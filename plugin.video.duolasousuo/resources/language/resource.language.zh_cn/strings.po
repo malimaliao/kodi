@@ -36,7 +36,7 @@ msgstr "使用云端搜索引擎"
 
 msgctxt "#30104"
 msgid "Local Search Engine"
-msgstr "内置搜索引擎"
+msgstr "内置搜索引擎接口"
 
 #3000x
 msgctxt "#30001"
