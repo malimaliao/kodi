@@ -218,7 +218,7 @@ if _plugin_parm == '':
     # add cloud
     if enable_cloud == 'true':
         #_plugin_dialog.ok(_plugin_name, '云引擎:' + enable_cloud)
-        _b = ' (本地)'
+        _b = ' (内置)'
         API_get_engine_list()
     # add local
     _local_api_url = xbmcplugin.getSetting(_plugin_handle, 'Duola_Local_Search_Engine')
