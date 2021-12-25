@@ -1,28 +1,17 @@
 {
-    "code": 0,
+    "code": 1,
     "message": "success",
-    "plugin": "plugin.video.duolasousuo",
     "data": {
-        "time": "2021-12-25 16:45:55",
-        "note": "none",
-        "zy_list": [{
-            "name": "WuJin",
+        "time": "2021-12-25 19:01:02",
+        "note": "",
+        "list": [{
+            "name": "线路1",
             "status": 1,
-            "url": "aHR0cHM6Ly9hcGkud3VqaW5hcGkuY29tL2FwaS5waHA=",
-            "vod_list": "/provide/vod/?ac=list",
-            "vod_detail": "/provide/vod/?ac=detail",
-            "vod_search": "/provide/vod/?wd=",
-            "vod_list_id": "/provide/vod/?ac=list&t=",
-            "vod_detail_id": "/provide/vod/?ac=detail&ids="
+            "api_url": "aHR0cHM6Ly9tM3U4LnhpYW5na2FuYXBpLmNvbS9wcm92aWRlL3ZvZC8="
         }, {
-            "name": "Kudian",
+            "name": "线路2",
             "status": 1,
-            "url": "aHR0cHM6Ly9hcGkua3VhcGkuY2MvYXBpLnBocA==",
-            "vod_list": "/provide/vod/?ac=list",
-            "vod_detail": "/provide/vod/?ac=detail",
-            "vod_search": "/provide/vod/?wd=",
-            "vod_list_id": "/provide/vod/?ac=list&t=",
-            "vod_detail_id": "/provide/vod/?ac=detail&ids="
+            "api_url": "aHR0cHM6Ly9hcGkua3VhcGkuY2MvYXBpLnBocC9wcm92aWRlL3ZvZC8="
         }]
     }
 }
