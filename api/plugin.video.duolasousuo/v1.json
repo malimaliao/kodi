@@ -1,0 +1,28 @@
+{
+    "code": 0,
+    "message": "success",
+    "plugin": "plugin.video.duolasousuo",
+    "data": {
+        "time": "2021-12-25 16:45:55",
+        "note": "none",
+        "zy_list": [{
+            "name": "WuJin",
+            "status": 1,
+            "api_url": "https://api.wujinapi.com/api.php",
+            "vod_list": "/provide/vod/?ac=list",
+            "vod_detail": "/provide/vod/?ac=detail",
+            "vod_search": "/provide/vod/?wd=",
+            "vod_list_id": "/provide/vod/?ac=list&t=",
+            "vod_detail_id": "/provide/vod/?ac=detail&ids="
+        }, {
+            "name": "Kudian",
+            "status": 1,
+            "api_url": "https://api.kuapi.cc/api.php",
+            "vod_list": "/provide/vod/?ac=list",
+            "vod_detail": "/provide/vod/?ac=detail",
+            "vod_search": "/provide/vod/?wd=",
+            "vod_list_id": "/provide/vod/?ac=list&t=",
+            "vod_detail_id": "/provide/vod/?ac=detail&ids="
+        }]
+    }
+}
