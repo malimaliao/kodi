@@ -8,7 +8,7 @@
         "zy_list": [{
             "name": "WuJin",
             "status": 1,
-            "api_url": "https://api.wujinapi.com/api.php",
+            "url": "aHR0cHM6Ly9hcGkud3VqaW5hcGkuY29tL2FwaS5waHA=",
             "vod_list": "/provide/vod/?ac=list",
             "vod_detail": "/provide/vod/?ac=detail",
             "vod_search": "/provide/vod/?wd=",
@@ -17,7 +17,7 @@
         }, {
             "name": "Kudian",
             "status": 1,
-            "api_url": "https://api.kuapi.cc/api.php",
+            "url": "aHR0cHM6Ly9hcGkua3VhcGkuY2MvYXBpLnBocA==",
             "vod_list": "/provide/vod/?ac=list",
             "vod_detail": "/provide/vod/?ac=detail",
             "vod_search": "/provide/vod/?wd=",
