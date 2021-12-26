@@ -4,7 +4,9 @@ import requests
 import urllib.parse
 from collections import OrderedDict
 # https://codedocs.xyz/xbmc/xbmc/
-import xbmcplugin, xbmcgui, xbmc
+import xbmc, xbmcplugin, xbmcgui
+import xbmcvfs , xbmcaddon
+import os, datetime
 
 # plugin base config
 _plugin_name = '哆啦搜索'
@@ -13,11 +15,9 @@ _plugin_handle = int(sys.argv[1])  # 当前插件句柄
 _plugin_address = sys.argv[0]  # 当前插件地址
 _plugin_parm = sys.argv[2]  # 问号以后的内容
 _plugin_dialog = xbmcgui.Dialog()
-# plugin custom config
 _plugin_player_style = int(xbmcplugin.getSetting(_plugin_handle, 'Duola_play_style'))
-_plugin_enable_analytics = False
 # 系统会追加 ?addons=[_plugin_address]
-API_cloud_url = 'https://kodi.maliao.workers.dev/api/plugin.video.duolasousuo/v1.json'
+_plugin_cloud_url = 'https://kodi.maliao.workers.dev/api/plugin.video.duolasousuo/v1.json'
 
 # bot config
 UA_head = { 
@@ -181,46 +181,97 @@ def Web_load_detail_one(_api_url, detail_id):
         print('duola_debug:目标服务器返回的数据无法解析')
         _plugin_dialog.notification(heading=_plugin_name, message='抱歉，目标服务器返回的数据无法响应，服务暂不可用', time=3000)
 
-# API->engine
-def API_get_engine_list():
+# API->engine get new
+def API_get_Cloud_Engine_new(CloudEngine_cache_path):
     tj_agent = xbmc.getUserAgent()
     tj_agent += ' Kodi-Plugin:' +  _plugin_address
     tj_ua = { 'User-Agent': tj_agent }
-    res = requests.get(url = API_cloud_url + '?addons=', headers = tj_ua)
-    # print('duola_debug: api=>' + API_cloud_url, res.text)
-    if check_json(res.text):
-        api = json.loads(res.text)
-        #print('duola_debug:zy code' + str(api['code'] ))
-        #print('duola_debug:zy data_list' + str(len(api['data']['list'])) )
-        if api['code'] == 1 and len(api['data']['list']) > 0:
-            print('duola_debug:zy YES')
-            for zy in api['data']['list']:
-                # print('duola_debug:zy' + zy['name'] + '@' + zy['api_url'])
-                if zy['status'] == 1:
-                    _api_url = urllib.parse.quote(base64.b64decode(zy['api_url'])) # base64 解码后，再URL编码
-                    _api_title = ' [COLOR yellow] (' + zy['name'] + ') [/COLOR]'
-                    listitem=xbmcgui.ListItem('哆啦搜索' + _api_title)
-                    xbmcplugin.addDirectoryItem(_plugin_handle, _plugin_address+'?start_engine='+_api_url, listitem, True)
+    # print('duola_debug: api=>' + _plugin_cloud_url, res.text)
+    res = requests.get(url = _plugin_cloud_url + '?addons=', headers = tj_ua)
+    cloud_engine_text = res.text
+    # 写入缓存，降低服务器请求数
+    expires_in = 3600 # 初始有效时间为1小时
+    if check_json(cloud_engine_text):
+        api_json = json.loads(cloud_engine_text)
+        if 'expires_in' in api_json:
+            expires_in = float(api_json['expires_in']) # 使用服务器限定的有效期
+        next_time = datetime.datetime.now() + datetime.timedelta(seconds=expires_in) # 设定时间有效期在n秒后失效
+        next_timestamp = str(int(next_time.timestamp()))
+        with xbmcvfs.File(CloudEngine_cache_path, 'w') as f:
+            time_value = 'next_timestamp=' + next_timestamp # 有效时间
+            f.write(time_value) # time
+            f.write('\n--------\n') # 此处分隔符
+            f.write(cloud_engine_text) # json
+    return cloud_engine_text
+
+# API->engine get
+def API_get_Cloud_Engine():
+    temp_path= xbmcvfs.translatePath('special://home/temp')
+    my_addon = xbmcaddon.Addon()
+    my_addon_id = my_addon.getAddonInfo('id')
+    my_cache_path = os.path.join(temp_path, my_addon_id, '')
+    xbmcvfs.mkdirs(my_cache_path)
+    if xbmcvfs.exists(my_cache_path):
+        print('duola_debug: 缓存目录读取成功->' + my_cache_path )
+        my_cloud_engine_cache = os.path.join(my_cache_path, 'Duola_Local_Search_Engine.txt')
+        if xbmcvfs.exists(my_cloud_engine_cache):
+            cloud_engine_text = ""
+            with xbmcvfs.File(my_cloud_engine_cache) as f:
+                cache = f.read()
+                a = cache.split('--------')
+                a101 = a[1] # json text
+                b = a[0].split('timestamp=')
+                cc = b[1].replace('\n', '') # next_timestamp=1640507115
+                print(b, cc)
+                next_timestamp = int(cc)
+                this_timestamp = int(datetime.datetime.now().timestamp())
+                print('this_timestamp:'+str(this_timestamp)+',next_timestamp:' + str(next_timestamp), cloud_engine_text)
+                if this_timestamp < next_timestamp:
+                    print('duola_debug: 从本地读取引擎数据->' + my_cloud_engine_cache)
+                    cloud_engine_text = a101 # 使用缓存
                 else:
-                    _api_title = ' [COLOR blue] (' + zy['name'] + ') ' + ' 暂不可用[/COLOR]'
-                    listitem=xbmcgui.ListItem('哆啦搜索' + _api_title)
-                    xbmcplugin.addDirectoryItem(_plugin_handle, _plugin_address, listitem, True)
+                    print('duola_debug: 从云端刷新引擎数据->' + _plugin_cloud_url)
+                    cloud_engine_text = API_get_Cloud_Engine_new() # 重新获取
         else:
-            _plugin_dialog.notification(heading=_plugin_name, message='云端搜索引擎暂时出现故障，请稍后重试' + api['message'], time=3000)
+            print('duola_debug: 从云端拉取引擎数据->' + _plugin_cloud_url)
+            cloud_engine_text = API_get_Cloud_Engine_new(my_cloud_engine_cache)
+        # ----- 解析json ------
+        if check_json(cloud_engine_text):
+            api = json.loads(cloud_engine_text)
+            #print('duola_debug:zy code' + str(api['code'] ))
+            #print('duola_debug:zy data_list' + str(len(api['data']['list'])) )
+            if api['code'] == 1 and len(api['data']['list']) > 0:
+                print('duola_debug:zy YES')
+                for zy in api['data']['list']:
+                    # print('duola_debug:zy' + zy['name'] + '@' + zy['api_url'])
+                    if zy['status'] == 1:
+                        _api_url = urllib.parse.quote(base64.b64decode(zy['api_url'])) # base64 解码后，再URL编码
+                        _api_title = ' [COLOR yellow] (' + zy['name'] + ') [/COLOR]'
+                        listitem=xbmcgui.ListItem('哆啦搜索' + _api_title)
+                        xbmcplugin.addDirectoryItem(_plugin_handle, _plugin_address+'?start_engine='+_api_url, listitem, True)
+                    else:
+                        _api_title = ' [COLOR blue] (' + zy['name'] + ') ' + ' 暂不可用[/COLOR]'
+                        listitem=xbmcgui.ListItem('哆啦搜索' + _api_title)
+                        xbmcplugin.addDirectoryItem(_plugin_handle, _plugin_address, listitem, True)
+            else:
+                _plugin_dialog.notification(heading=_plugin_name, message='云端搜索引擎暂时出现故障，请稍后重试' + api['message'], time=3000)
+        else:
+            _plugin_dialog.notification(heading=_plugin_name, message='暂时无法连接云端搜索引擎服务器，请稍后重试', time=3000)
+        # ----- 解析json ------
     else:
-        _plugin_dialog.notification(heading=_plugin_name, message='暂时无法连接云端搜索引擎服务器，请稍后重试', time=3000)
+        print('duola_debug: 缓存目录读取失败->' + my_cache_path )
+        _plugin_dialog.ok(_plugin_name, '抱歉，由于缓存无法读写，因此云端引擎不可用。文件地址：' + my_cache_path)
 
 # /
 if _plugin_parm == '':
     # print('duola_debug:'+ xbmcplugin.getSetting(_plugin_handle, 'Duola_Cloud_Search_Engine') )
     enable_cloud = xbmcplugin.getSetting(_plugin_handle, 'Duola_Cloud_Search_Engine')
     _b = ""
-    # add cloud
+    # add cloud menu
     if enable_cloud == 'true':
-        #_plugin_dialog.ok(_plugin_name, '云引擎:' + enable_cloud)
-        _b = ' (内置)'
-        API_get_engine_list()
-    # add local
+        _b = ' (本地)'
+        API_get_Cloud_Engine()
+    # add local menu
     _local_api_url = xbmcplugin.getSetting(_plugin_handle, 'Duola_Local_Search_Engine')
     _api_url = urllib.parse.quote(_local_api_url)
     listitem=xbmcgui.ListItem('哆啦搜索' + _b)
