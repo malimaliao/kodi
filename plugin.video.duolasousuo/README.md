@@ -12,9 +12,8 @@
 
 在設置中，修改【內置搜索引擎接口】，可以修改為你所需要的資源站數據接口。
 
-資源站son數據接口，例如“https://api.kuapi.cc/api.php/provide/vod/?ac=list” 則只需要問號之前的，即 “https://api.kuapi.cc/api.php/provide/vod/”
-
-
+資源站json接口：例如“https://api.123.com/api.php/provide/vod/?ac=list” 則只需要接口為 “https://api.123.com/api.php/provide/vod/”
+將 https://api.123.com/api.php/provide/vod/ 替換系統內置的接口地址即可。
 
 > 如何啟用雲端引擎接口？
 
