@@ -1,37 +1,26 @@
-## Welcome to GitHub Pages
+## 欢迎来到Malimali Ao的Kodi插件主页
 
-You can use the [editor on GitHub](https://github.com/malimaliao/kodi-addons/edit/matrix/docs/index.md) to maintain and preview the content for your website in Markdown files.
+你可以通过这里下载免费的 [Kodi](https://www.kodi.tv/) 插件。由于Kodi已经迎来v19版本，本人所开发插件也仅适用于该系列及其更高版本。
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Markdown
+### 插件声明
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+本人所开发的插件，通过Python采集所涉及到的第三方平台或网站内容均系其第三方所有，本人不对第三方内容的合规性和完整性负责，也不对其享有任何权利。任何人使用本人所开发的插件，仅适用于测试和学习目的，不得用以其他用途。
 
 ```markdown
-Syntax highlighted code block
+### Kodi插件独立zip包安装方法
 
-# Header 1
-## Header 2
-### Header 3
+* 进入Kodi系统 Launch Kodi
+* 选择 系统-设置-插件 Navigate to System | Settings | Add-ons
+* 选择 从zip文件安装 Select Install from zip file
+* 浏览目录找到刚下载的zip安装包 Browse to the directory where the new downloaded zip file is being stored.
+* 选择 确定 Select OK
 
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
 ```
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+如果你想寻找或学习更多的Kodi插件，推荐浏览或安装 [xbmc-addons-chinese](https://github.com/taxigps/xbmc-addons-chinese) 插件库，这样可以通过插件库的方式下载插件更加方便。
 
-### Jekyll Themes
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/malimaliao/kodi-addons/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+### 问题反馈
 
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+如果您有什么建议，请通过 [issues](https://github.com/malimaliao/kodi-addons/issues)进行交流。
