@@ -7,8 +7,47 @@
 
 本人所开发的插件，通过Python采集所涉及到的第三方平台或网站内容均系其第三方所有，本人不对第三方内容的合规性和完整性负责，也不对其享有任何权利。任何人使用本人所开发的插件，仅适用于测试和学习目的，不得用以其他用途。
 
+### 下载列表
+
+<table>
+	<thead>
+	<tr>
+		<th>名称</th>
+		<th>版本</th>
+		<th>类型</th>
+		<th>资源</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>多啦搜索</td>
+		<td>1.3.0</td>
+		<td>视频插件</td>
+		<td>
+			<a href="down/plugin.video.duolasousuo-1.3.0.zip">下载</a>
+		</td>
+	</tr>
+	<tr>
+		<td>韩剧视频</td>
+		<td>2.1.0</td>
+		<td>视频插件</td>
+		<td>
+			<a href="down/plugin.video.hanju-2.1.0.zip">下载</a>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="5" align="center">
+			<div id="qrcode"></div>
+			<br>支持非微信扫码访问
+		</td>
+	</tr>
+	</tbody>
+</table>
+
+### 安装方法
+
 ```markdown
-### Kodi插件独立zip包安装方法
+#### 适用于独立的zip格式的kodi插件安装包
 
 * 进入Kodi系统 Launch Kodi
 * 选择 系统-设置-插件 Navigate to System | Settings | Add-ons
@@ -20,6 +59,7 @@
 
 如果你想寻找或学习更多的Kodi插件，推荐浏览或安装 [xbmc-addons-chinese](https://github.com/taxigps/xbmc-addons-chinese) 插件库，这样可以通过插件库的方式下载插件更加方便。
 
+-------
 
 ### 问题反馈
 
