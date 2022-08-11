@@ -10,38 +10,36 @@
 ### 下载列表
 
 <table>
-	<thead>
-	<tr>
-		<th>名称</th>
-		<th>版本</th>
-		<th>类型</th>
-		<th>资源</th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr>
-		<td>多啦搜索</td>
-		<td>1.3.0</td>
-		<td>视频插件</td>
-		<td>
-			<a href="down/plugin.video.duolasousuo-1.3.0.zip">下载</a>
-		</td>
-	</tr>
-	<tr>
-		<td>韩剧视频</td>
-		<td>2.1.0</td>
-		<td>视频插件</td>
-		<td>
-			<a href="down/plugin.video.hanju-2.1.0.zip">下载</a>
-		</td>
-	</tr>
-	<tr>
-		<td colspan="5" align="center">
-			<div id="qrcode"></div>
-			<br>支持非微信扫码访问
-		</td>
-	</tr>
-	</tbody>
+<thead>
+<tr>
+<th>名称</th>
+<th>版本</th>
+<th>类型</th>
+<th>资源</th>
+</tr>
+</thead>
+<tbody>
+
+<tr>
+<td>多啦搜索</td>
+<td>1.3.0</td>
+<td>视频插件</td>
+<td><a href="down/plugin.video.duolasousuo-1.3.0.zip">下载</a></td>
+</tr>
+
+<tr>
+<td>韩剧视频</td>
+<td>2.1.0</td>
+<td>视频插件</td>
+<td><a href="down/plugin.video.hanju-2.1.0.zip">下载</a></td>
+</tr>
+<tr>
+<td colspan="5" align="center">
+如果你想寻找或学习更多的Kodi插件，推荐浏览或安装 [xbmc-addons-chinese](https://github.com/taxigps/xbmc-addons-chinese) 插件库，这样可以通过插件库的方式下载插件更加方便。
+</td>
+</tr>
+
+</tbody>
 </table>
 
 ### 安装方法
@@ -57,10 +55,8 @@
 
 ```
 
-如果你想寻找或学习更多的Kodi插件，推荐浏览或安装 [xbmc-addons-chinese](https://github.com/taxigps/xbmc-addons-chinese) 插件库，这样可以通过插件库的方式下载插件更加方便。
-
 -------
 
 ### 问题反馈
 
-如果您有什么建议，请通过 [issues](https://github.com/malimaliao/kodi-addons/issues)进行交流。
+如果您有什么建议，请通过[issues](https://github.com/malimaliao/kodi-addons/issues)进行交流。
