@@ -1,4 +1,4 @@
-## Malimali Ao的Kodi插件下载主页
+## Malimaliao的Kodi插件主页
 
 你可以通过这里下载免费的 [Kodi](https://www.kodi.tv/) 插件。由于Kodi已经迎来v19版本，本人所开发插件也仅适用于该系列及其更高版本。
 
@@ -45,13 +45,13 @@
 ### 安装方法
 
 ```markdown
-#### 适用于独立的zip格式的kodi插件安装包
+*该安装方法适用于独立的zip格式的kodi插件安装包*
 
-* 进入Kodi系统 Launch Kodi
-* 选择 系统-设置-插件 Navigate to System | Settings | Add-ons
-* 选择 从zip文件安装 Select Install from zip file
-* 浏览目录找到刚下载的zip安装包 Browse to the directory where the new downloaded zip file is being stored.
-* 选择 确定 Select OK
+- 进入Kodi系统 Launch Kodi
+- 选择 系统-设置-插件 Navigate to System | Settings | Add-ons
+- 选择 从zip文件安装 Select Install from zip file
+- 浏览目录找到刚下载的zip安装包 Browse to the directory where the new downloaded zip file is being stored.
+- 选择 确定 Select OK
 
 ```
 
