@@ -1,4 +1,4 @@
-## 欢迎来到Malimali Ao的Kodi插件主页
+## Malimali Ao的Kodi插件下载主页
 
 你可以通过这里下载免费的 [Kodi](https://www.kodi.tv/) 插件。由于Kodi已经迎来v19版本，本人所开发插件也仅适用于该系列及其更高版本。
 
