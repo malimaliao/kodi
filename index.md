@@ -35,7 +35,7 @@
 </tr>
 <tr>
 <td colspan="5" align="center">
-如果你想寻找或学习更多的Kodi插件，推荐浏览或安装 [xbmc-addons-chinese](https://github.com/taxigps/xbmc-addons-chinese) 插件库，这样可以通过插件库的方式下载插件更加方便。
+  如果你想寻找更多的Kodi插件，推荐使用 <a href="https://github.com/taxigps/xbmc-addons-chinese">xbmc-addons-chinese中文插件库</a>，通过插件库的方式下载安装插件更加方便。
 </td>
 </tr>
 
@@ -59,4 +59,4 @@
 
 ### 问题反馈
 
-如果您有什么建议，请通过[issues](https://github.com/malimaliao/kodi-addons/issues)进行交流。
+如果您有什么建议，请通过 [issues](https://github.com/malimaliao/kodi-addons/issues) 进行交流。
