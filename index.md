@@ -2,7 +2,6 @@
 
 你可以通过这里下载我所开发的免费的 [Kodi](https://www.kodi.tv/) 插件。
 
-本页面所罗列的插件仅适用Kodi 19、Kodi 20 或更高版本。
 
 
 > #### 插件声明
@@ -35,11 +34,8 @@
 <td><del>视频插件</del></td>
 <td><a href="down/plugin.video.hanju-2.1.0.zip"><del>停止更新</del></a></td>
 </tr>
-<tr>
-<td colspan="5" align="center">
-  如果你想寻找更多的Kodi插件，推荐使用 <a href="https://github.com/taxigps/xbmc-addons-chinese">xbmc-addons-chinese中文插件库</a>，通过插件库的方式下载安装插件更加方便。
-</td>
-</tr>
+
+<tr><td colspan="5" align="center"> * 本页面所罗列的插件仅适用Kodi 19、Kodi 20 或更高版本。</td></tr>
 
 </tbody>
 </table>
