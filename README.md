@@ -2,4 +2,4 @@
 
 > 适用于Kodi 19 及更高版本
 
-如果您想浏览更详细的介绍，请查看下载主页：https://malimaliao.github.io/kodi-addons/
+如果您想浏览更详细的介绍，请查看下载主页：https://malimaliao.github.io/kodi/
