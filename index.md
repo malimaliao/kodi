@@ -24,16 +24,16 @@
 
 <tr>
 <td>多啦搜索</td>
-<td>1.3.0</td>
+<td>1.4.0</td>
 <td>视频插件</td>
-<td><a href="down/plugin.video.duolasousuo-1.3.0.zip">立即下载</a></td>
+<td><a href="down/plugin.video.duolasousuo-1.4.0.zip">立即下载</a></td>
 </tr>
 
 <tr>
-<td>~~ 韩剧视频 ~~</td>
-<td>~~ 2.1.0 ~~</td>
-<td>~~ 视频插件 ~~</td>
-<td><a href="down/plugin.video.hanju-2.1.0.zip">~~ 停止更新 ~~</a></td>
+<td><del>韩剧视频</del></td>
+<td><del>2.1.0</del></td>
+<td><del>视频插件</del></td>
+<td><a href="down/plugin.video.hanju-2.1.0.zip"><del>停止更新</del></a></td>
 </tr>
 <tr>
 <td colspan="5" align="center">
@@ -61,13 +61,11 @@
 
 ### 自动安装
 
-```markdown
 *该安装方法适用于独立的zip格式的kodi插件安装包*
 
 本插件均已投稿至【xbmc-addons-chinese中文插件库】
 请安装并使用 <a href="https://github.com/taxigps/xbmc-addons-chinese">xbmc-addons-chinese中文插件库</a> ，通过该插件库直接安装以上插件。
 
-```
 
 -------
 
