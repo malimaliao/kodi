@@ -10,7 +10,7 @@ import os, datetime
 
 # plugin base config
 _plugin_name = '哆啦搜索'
-_plugin_player_mimes = ['.m3u8','.mp4','.flv','.ts']
+_plugin_player_mimes = ['.m3u8','.mp4','.flv','.ts', '.ogg', '.mp3']
 _plugin_handle = int(sys.argv[1])  # 当前插件句柄
 _plugin_address = sys.argv[0]  # 当前插件地址
 _plugin_parm = sys.argv[2]  # 问号以后的内容
@@ -46,9 +46,15 @@ def check_url_mime(url):
 # return: 
 def Web_load_search(_api_url, keyword):
     get_url = _api_url + '?wd=' + keyword
-    res = requests.get(url=get_url,headers=UA_head)
-    # print('duola_debug:'+get_url, res.text)
-    #_plugin_dialog.ok(_plugin_name + 'debug', get_url)
+    try:
+        res = requests.get(url=get_url,headers=UA_head)
+        res_text = res.text
+        # print('duola_debug:'+get_url, res.text)
+        #_plugin_dialog.ok(_plugin_name + 'debug', get_url)
+    except requests.exceptions.RequestException as e:
+        res_text = ''
+        _plugin_dialog.notification(heading=_plugin_name, message='搜索获取失败，暂不可用', time=3000)
+        print('duola_debug: Web_load_search => bad', e)
     if check_json(res.text):
         res_json = json.loads(res.text)
         if res_json['code'] == 1:
@@ -80,9 +86,14 @@ def Web_load_search(_api_url, keyword):
 # return: play list
 def Web_load_detail_one(_api_url, detail_id):
     get_url = _api_url + '?ac=detail&ids=' + detail_id
-    res = requests.get(url=get_url,headers=UA_head)
-    #print('duola_debug:'+get_url, res.text)
-    #_plugin_dialog.ok(_plugin_name + 'debug', get_url)
+    try:
+        res = requests.get(url=get_url,headers=UA_head)
+        res_text = res.text
+        # print('duola_debug:'+get_url, res.text)
+    except requests.exceptions.RequestException as e:
+        res_text = ''
+        _plugin_dialog.notification(heading=_plugin_name, message='内容获取失败，暂不可用', time=3000)
+        print('duola_debug: Web_load_detail_one => bad', e)
     if check_json(res.text):
         res_json = json.loads(res.text)
         if res_json['code'] == 1:
@@ -187,7 +198,13 @@ def Web_load_detail_one(_api_url, detail_id):
 # return: channels list
 def Web_load_channels(_api_url):
     get_url = _api_url + '?ac=list'
-    res = requests.get(url=get_url,headers=UA_head)
+    try:
+        res = requests.get(url=get_url,headers=UA_head)
+        res_text = res.text
+    except requests.exceptions.RequestException as e:
+        res_text = ''
+        _plugin_dialog.notification(heading=_plugin_name, message='栏目获取失败，暂不可用', time=3000)
+        print('duola_debug: Web_load_channels => bad', e)
     if check_json(res.text):
         res_json = json.loads(res.text)
         if res_json['code'] == 1:
@@ -221,7 +238,13 @@ def Web_load_channels(_api_url):
 def Web_load_list(_api_url, type_id, page):
     get_url = _api_url + '?ac=list&t=' + type_id + '&pg=' + page
     print('dlt', get_url)
-    res = requests.get(url=get_url,headers=UA_head)
+    try:
+        res = requests.get(url=get_url,headers=UA_head)
+        res_text = res.text
+    except requests.exceptions.RequestException as e:
+        res_text = ''
+        _plugin_dialog.notification(heading=_plugin_name, message='列表获取失败，暂不可用', time=3000)
+        print('duola_debug: Web_load_list => bad', e)
     if check_json(res.text):
         res_json = json.loads(res.text)
         if res_json['code'] == 1:
@@ -258,21 +281,25 @@ def API_get_Cloud_Engine_new(Cache_save_path):
     tj_agent += ' Kodi-Plugin:' +  _plugin_address
     tj_ua = { 'User-Agent': tj_agent }
     # print('duola_debug: api=>' + _plugin_cloud_url, res.text)
-    res = requests.get(url = _plugin_cloud_url + '?addons=', headers = tj_ua)
-    cloud_engine_text = res.text
-    # 写入缓存，降低服务器请求数
-    expires_in = 3600 # 初始有效时间为1小时
-    if check_json(cloud_engine_text):
-        api_json = json.loads(cloud_engine_text)
-        if 'expires_in' in api_json:
-            expires_in = float(api_json['expires_in']) # 使用服务器限定的有效期
-        next_time = datetime.datetime.now() + datetime.timedelta(seconds=expires_in) # 设定时间有效期在n秒后失效
-        next_timestamp = str(int(next_time.timestamp()))
-        with xbmcvfs.File(Cache_save_path, 'w') as f:
-            time_value = 'next_timestamp=' + next_timestamp # 有效时间
-            f.write(time_value) # time
-            f.write('\n--------\n') # 此处分隔符
-            f.write(cloud_engine_text) # json
+    try:
+        res = requests.get(url = _plugin_cloud_url + '?addons=', headers = tj_ua)
+        cloud_engine_text = res.text
+        # 写入缓存，降低服务器请求数
+        expires_in = 3600 # 初始有效时间为1小时
+        if check_json(cloud_engine_text):
+            api_json = json.loads(cloud_engine_text)
+            if 'expires_in' in api_json:
+                expires_in = float(api_json['expires_in']) # 使用服务器限定的有效期
+            next_time = datetime.datetime.now() + datetime.timedelta(seconds=expires_in) # 设定时间有效期在n秒后失效
+            next_timestamp = str(int(next_time.timestamp()))
+            with xbmcvfs.File(Cache_save_path, 'w') as f:
+                time_value = 'next_timestamp=' + next_timestamp # 有效时间
+                f.write(time_value) # time
+                f.write('\n--------\n') # 此处分隔符
+                f.write(cloud_engine_text) # json
+    except requests.exceptions.RequestException as e:
+        cloud_engine_text = ''
+        print('duola_debug: API_get_Cloud_Engine_new => BAD', e)
     return cloud_engine_text
 
 # API->engine get
@@ -345,9 +372,9 @@ def API_get_Cloud_Readme():
         if check_json(cloud_engine_text):
             api_json = json.loads(cloud_engine_text)
             readme = api_json['readme']
-            _plugin_dialog.notification(heading=_plugin_name, message=readme, time=5000)
+            _plugin_dialog.notification(heading=_plugin_name, message=readme, time=4000)
     except requests.exceptions.RequestException as e:
-        print('duola_debug: readme =>' + _plugin_cloud_url, e)
+        print('duola_debug: readme => bad', e)
 
 # /
 if _plugin_parm == '':

@@ -22,10 +22,10 @@
 <tbody>
 
 <tr>
-<td>多啦搜索</td>
-<td>1.4.0</td>
+<td>哆啦搜索</td>
+<td>1.5.0</td>
 <td>视频插件</td>
-<td><a href="down/plugin.video.duolasousuo-1.4.0.zip">立即下载</a></td>
+<td><a href="down/plugin.video.duolasousuo-1.5.0.zip">立即下载</a></td>
 </tr>
 
 <tr>
@@ -35,7 +35,7 @@
 <td><a href="down/plugin.video.hanju-2.1.0.zip"><del>停止更新</del></a></td>
 </tr>
 
-<tr><td colspan="5" align="center"> * 本页面所罗列的插件仅适用Kodi 19、Kodi 20 或更高版本。</td></tr>
+<tr><td colspan="5" align="center"> * 以上插件仅适用Kodi 19、Kodi 20 或更高版本。</td></tr>
 
 </tbody>
 </table>
@@ -45,11 +45,12 @@
 ```markdown
 *该安装方法适用于独立的zip格式的kodi插件安装包*
 
-- 进入Kodi系统 Launch Kodi
-- 选择 系统-设置-插件 Navigate to System | Settings | Add-ons
-- 选择 从zip文件安装 Select Install from zip file
-- 浏览目录找到刚下载的zip安装包 Browse to the directory where the new downloaded zip file is being stored.
-- 选择 确定 Select OK
+- 进入Kodi系统 (Start Kodi)
+- 选择 系统-设置-插件 (Navigate to System -> Settings -> Add-ons)
+- 选择 从zip文件安装 (Select Install from zip file)
+- 浏览目录找到刚下载的zip安装包 (Browse to the directory where the new downloaded zip file is being stored)
+- 选择 确定 (Select OK)
+- 结束 (End)
 
 ```
 
@@ -68,3 +69,5 @@
 ### 问题反馈
 
 如果您有什么建议，请通过 [issues](https://github.com/malimaliao/kodi-addons/issues) 进行交流。
+
+> 本插件是一个Kodi练习测试应用，基于python拓扑了第三方的引用内容，所有资源均与作者无关！仅供阁下参考和学习。请下载学习后删除。
