@@ -2,26 +2,44 @@
     "code": 1,
     "message": "success",
     "expires_in": 7200,
-    "readme": "手机电影搜索推荐：wuya1.com",
+    "readme": "Github搜索malimaliao下载新版本",
+    "notice": "5omL5py655S15b2x5pCc57Si5o6o6I2Q77yad3V5YTEuY29t",
+    "client": 1.60,
     "data": {
         "time": "2023-02-06 18:01:02",
         "note": "",
         "list": [{
-            "name": "线路1-飞速资源",
+            "name": "线路1-飞速网络",
             "status": 1,
             "api_url": "aHR0cHM6Ly93d3cuZmVpc3V6eWFwaS5jb20vYXBpLnBocC9wcm92aWRlL3ZvZC8="
         }, {
-            "name": "线路2-闪电资源",
+            "name": "线路2-闪电网络",
             "status": 1,
             "api_url": "aHR0cHM6Ly9zZHp5YXBpLmNvbS9hcGkucGhwL3Byb3ZpZGUvdm9kLw=="
         }, {
-            "name": "线路3-鱼乐资源",
+            "name": "线路3-非凡网络",
             "status": 1,
-            "api_url": "aHR0cHM6Ly9hcGkueXVsZWNqLmNvbS9hcGkucGhwL3Byb3ZpZGUvdm9kLw=="
+            "api_url": "aHR0cDovL2NqLmZmenlhcGkuY29tL2FwaS5waHAvcHJvdmlkZS92b2Qv"
         }, {
-            "name": "线路4-酷点资源",
+            "name": "线路4-酷点网络",
             "status": 1,
             "api_url": "aHR0cHM6Ly9hcGkua3VhcGkuY2MvYXBpLnBocC9wcm92aWRlL3ZvZC8="
+        }, {
+            "name": "线路5-热巴网络",
+            "status": 1,
+            "api_url": "aHR0cDovL3JlYmEuYWlzaHVueHMuY29tL2FwaS5waHAvcHJvdmlkZS92b2Qv"
+        }, {
+            "name": "线路6-量子网络",
+            "status": 1,
+            "api_url": "aHR0cHM6Ly9jai5semlhcGkuY29tL2FwaS5waHAvcHJvdmlkZS92b2Qv"
+        }, {
+            "name": "线路7-光速网络",
+            "status": 1,
+            "api_url": "aHR0cHM6Ly9hcGkuZ3VhbmdzdWFwaS5jb20vYXBpLnBocC9wcm92aWRlL3ZvZC8="
+        }, {
+            "name": "线路8-金鹰网络",
+            "status": 1,
+            "api_url": "aHR0cHM6Ly9qeXp5YXBpLmNvbS9wcm92aWRlL3ZvZC9mcm9tL2ppbnlpbmdtM3U4L2F0L2pzb24="
         }]
     }
 }
