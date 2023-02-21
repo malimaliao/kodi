@@ -23,9 +23,9 @@
 
 <tr>
 <td>哆啦搜索</td>
-<td>1.5.0</td>
+<td>1.6.0</td>
 <td>视频插件</td>
-<td><a href="down/plugin.video.duolasousuo-1.5.0.zip">立即下载</a></td>
+<td><a href="down/plugin.video.duolasousuo-1.6.0.zip">立即下载</a></td>
 </tr>
 
 <tr>
