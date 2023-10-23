@@ -21,14 +21,6 @@
             "status": 1,
             "api_url": "aHR0cDovL2NqLmZmenlhcGkuY29tL2FwaS5waHAvcHJvdmlkZS92b2Qv"
         }, {
-            "name": "线路4-酷点网络",
-            "status": 1,
-            "api_url": "aHR0cHM6Ly9hcGkua3VhcGkuY2MvYXBpLnBocC9wcm92aWRlL3ZvZC8="
-        }, {
-            "name": "线路5-玉兔网络",
-            "status": 1,
-            "api_url": "aHR0cHM6Ly9hcGl5dXR1LmNvbS9hcGkucGhwL3Byb3ZpZGUvdm9kLw=="
-        }, {
             "name": "线路6-量子网络",
             "status": 1,
             "api_url": "aHR0cHM6Ly9jai5semlhcGkuY29tL2FwaS5waHAvcHJvdmlkZS92b2Qv"
