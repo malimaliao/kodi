@@ -21,15 +21,15 @@
             "status": 1,
             "api_url": "aHR0cDovL2NqLmZmenlhcGkuY29tL2FwaS5waHAvcHJvdmlkZS92b2Qv"
         }, {
-            "name": "线路6-量子网络",
+            "name": "线路4-量子网络",
             "status": 1,
             "api_url": "aHR0cHM6Ly9jai5semlhcGkuY29tL2FwaS5waHAvcHJvdmlkZS92b2Qv"
         }, {
-            "name": "线路7-光速网络",
+            "name": "线路5-光速网络",
             "status": 1,
             "api_url": "aHR0cHM6Ly9hcGkuZ3VhbmdzdWFwaS5jb20vYXBpLnBocC9wcm92aWRlL3ZvZC8="
         }, {
-            "name": "线路8-金鹰网络",
+            "name": "线路6-金鹰网络",
             "status": 1,
             "api_url": "aHR0cHM6Ly9qeXp5YXBpLmNvbS9wcm92aWRlL3ZvZC9mcm9tL2ppbnlpbmdtM3U4L2F0L2pzb24="
         }]
