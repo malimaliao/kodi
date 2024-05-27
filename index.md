@@ -16,7 +16,7 @@
 <th>名称</th>
 <th>版本</th>
 <th>类型</th>
-<th>资源</th>
+<th>仓库</th>
 </tr>
 </thead>
 <tbody>
@@ -25,7 +25,7 @@
 <td>哆啦搜索</td>
 <td>1.6.0</td>
 <td>视频插件</td>
-<td><a href="down/plugin.video.duolasousuo-1.6.0.zip">立即下载</a></td>
+<td><a href="https://github.com/malimaliao/plugin.video.duolasousuo/releases/">立即访问</a></td>
 </tr>
 
 <tr>
