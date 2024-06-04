@@ -68,6 +68,6 @@
 
 ### 问题反馈
 
-如果您有什么建议，请通过 [issues](https://github.com/malimaliao/kodi-addons/issues) 进行交流。
+如果您有什么建议，请通过 [issues](https://github.com/malimaliao/kodi/issues) 进行交流。
 
 > 本插件是一个Kodi练习测试应用，基于python拓扑了第三方的引用内容，所有资源均与作者无关！仅供阁下参考和学习。请下载学习后删除。
