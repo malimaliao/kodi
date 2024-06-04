@@ -3,6 +3,11 @@
 你可以通过这里下载我所开发的免费的 [Kodi](https://www.kodi.tv/) 插件。
 
 
+### Kodi官网 & 镜像
+
+* https://www.kodi.tv/
+* https://mirrors.ustc.edu.cn/xbmc/releases/
+* https://mirror.tuna.tsinghua.edu.cn/help/kodi/
 
 > #### 插件声明
 
