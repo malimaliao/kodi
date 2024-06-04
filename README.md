@@ -6,7 +6,7 @@
 ### Kodi官网 & 镜像
 
 * https://www.kodi.tv/
-* https://mirrors.ustc.edu.cn/xbmc/releases/
+* https://mirrors.ustc.edu.cn/help/xbmc.html
 * https://mirror.tuna.tsinghua.edu.cn/help/kodi/
 
 > #### 插件声明
