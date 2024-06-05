@@ -75,5 +75,6 @@
 
 * https://www.kodi.tv
 * [Kodi Add-on development](https://kodi.wiki/view/Add-on_development)
-* [XMBC Introduction](https://www.codedocs.xyz/xbmc/xbmc/)
+* [Kodi Introduction](https://xbmc.github.io/docs.kodi.tv/master/kodi-dev-kit/)
+* [XMBC Introduction from CodeDocs.xyz](https://www.codedocs.xyz/xbmc/xbmc/)
 * [清华大学 Kodi 镜像](https://mirror.tuna.tsinghua.edu.cn/help/kodi/)
