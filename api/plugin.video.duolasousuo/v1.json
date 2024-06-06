@@ -1,37 +1,59 @@
 {
-    "code": 1,
-    "message": "success",
-    "expires_in": 3600,
-    "readme": "当前版本太低，请到Github搜索duola下载新版",
-    "notice": "5qyi6L+O5YWJ5Li05Li76aG177yaaHR0cHM6Ly9tYWxpbWFsaWFvLmdpdGh1Yi5pby9rb2RpLw==",
-    "client": 1.60,
-    "data": {
-        "time": "2024-06-04 20:36:02",
-        "note": "",
-        "list": [{
-            "name": "线路1-飞速资源",
-            "status": 1,
-            "api_url": "aHR0cHM6Ly93d3cuZmVpc3V6eWFwaS5jb20vYXBpLnBocC9wcm92aWRlL3ZvZC8="
-        }, {
-            "name": "线路2-闪电网络",
-            "status": 1,
-            "api_url": "aHR0cHM6Ly9zZHp5YXBpLmNvbS9hcGkucGhwL3Byb3ZpZGUvdm9kLw=="
-        }, {
-            "name": "线路3-樱花网络",
-            "status": 1,
-            "api_url": "aHR0cHM6Ly9tM3U4LmFwaXloenkuY29tL2FwaS5waHAvcHJvdmlkZS92b2Qv"
-        }, {
-            "name": "线路4-量子网络",
-            "status": 1,
-            "api_url": "aHR0cHM6Ly9jai5semlhcGkuY29tL2FwaS5waHAvcHJvdmlkZS92b2Qv"
-        }, {
-            "name": "线路5-光速网络",
-            "status": 1,
-            "api_url": "aHR0cHM6Ly9hcGkuZ3VhbmdzdWFwaS5jb20vYXBpLnBocC9wcm92aWRlL3ZvZC8="
-        }, {
-            "name": "线路6-金鹰网络",
-            "status": 1,
-            "api_url": "aHR0cHM6Ly9qeXp5YXBpLmNvbS9wcm92aWRlL3ZvZC9mcm9tL2ppbnlpbmdtM3U4L2F0L2pzb24="
-        }]
-    }
+  "code": 1,
+  "message": "success",
+  "expires_in": 3600,
+  "readme": "当前版本太低，请到Github搜索duola下载新版",
+  "notice": "5qyi6L+O5YWJ5Li05Li76aG177yaaHR0cHM6Ly9tYWxpbWFsaWFvLmdpdGh1Yi5pby9rb2RpLw==",
+  "client": 1.60,
+  "data": {
+    "time": "2024-06-04 20:36:02",
+    "note": "",
+    "list": [
+      {
+        "name": "1.飞速资源",
+        "status": 1,
+        "api_url": "aHR0cHM6Ly93d3cuZmVpc3V6eWFwaS5jb20vYXBpLnBocC9wcm92aWRlL3ZvZC8="
+      },
+      {
+        "name": "2.非凡网络",
+        "status": 1,
+        "api_url": "aHR0cHM6Ly9jai5mZnp5YXBpLmNvbS9hcGkucGhwL3Byb3ZpZGUvdm9kLw=="
+      },
+      {
+        "name": "3.铁塔网络",
+        "status": 1,
+        "api_url": "aHR0cHM6Ly9hcGkudGlhbmtvbmdhcGkuY29tL2FwaS5waHAvcHJvdmlkZS92b2Qv"
+      },
+      {
+        "name": "4.皇后网络",
+        "status": 1,
+        "api_url": "aHR0cHM6Ly9oaHp5YXBpLmNvbS9hcGkucGhwL3Byb3ZpZGUvdm9kLw=="
+      },
+      {
+        "name": "5.光速网络",
+        "status": 1,
+        "api_url": "aHR0cHM6Ly9hcGkuZ3VhbmdzdWFwaS5jb20vYXBpLnBocC9wcm92aWRlL3ZvZC8="
+      },
+      {
+        "name": "6.金鹰网络",
+        "status": 1,
+        "api_url": "aHR0cHM6Ly9qeXp5YXBpLmNvbS9wcm92aWRlL3ZvZC9mcm9tL2ppbnlpbmdtM3U4L2F0L2pzb24="
+      },
+      {
+        "name": "7.天启网络",
+        "status": 1,
+        "api_url": "aHR0cHM6Ly8zNjB6eS5jb20vYXBpLnBocC9wcm92aWRlL3ZvZC8="
+      },
+      {
+        "name": "8.雷神网络",
+        "status": 1,
+        "api_url": "aHR0cHM6Ly9hcGkuMTA4MHp5a3UuY29tL2luYy9hcGlqc29uLnBocD93ZD0="
+      },
+      {
+        "name": "9.无极网络",
+        "status": 1,
+        "api_url": "aHR0cHM6Ly9hcGkud3VqaW5hcGkubWUvYXBpLnBocC9wcm92aWRlL3ZvZC8="
+      }
+    ]
+  }
 }
