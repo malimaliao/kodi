@@ -17,7 +17,8 @@
 <th>名称</th>
 <th>版本</th>
 <th>类型</th>
-<th>仓库</th>
+<th>源码</th>
+<th>下载地址</th>
 </tr>
 </thead>
 <tbody>
@@ -26,7 +27,8 @@
 <td>哆啦搜索</td>
 <td>1.6.0</td>
 <td>视频插件</td>
-<td><a href="https://github.com/malimaliao/plugin.video.duolasousuo/">访问仓库</a></td>
+<td><a href="https://github.com/malimaliao/plugin.video.duolasousuo/">源码仓库</a></td>
+<td><a href="https://github.com/malimaliao/plugin.video.duolasousuo/releases/">访问下载</a></td>
 </tr>
 
 <tr>
@@ -34,6 +36,7 @@
 <td><del>2.1.0</del></td>
 <td><del>视频插件</del></td>
 <td><a href="down/plugin.video.hanju-2.1.0.zip"><del>停止维护</del></a></td>
+<td><a href="#"><del>停止维护</del></a></td>
 </tr>
 
 <tr><td colspan="5" align="center"> * 以上插件仅适用Kodi 19、Kodi 20 或更高版本。</td></tr>
