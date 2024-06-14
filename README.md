@@ -25,7 +25,7 @@
 
 <tr>
 <td>哆啦搜索</td>
-<td>1.6.0</td>
+<td>1.7.0</td>
 <td>视频插件</td>
 <td><a href="https://github.com/malimaliao/plugin.video.duolasousuo/">源码仓库</a></td>
 <td><a href="https://github.com/malimaliao/plugin.video.duolasousuo/releases/">访问下载</a></td>
