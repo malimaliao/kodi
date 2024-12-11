@@ -11,7 +11,7 @@
     "list": [
       {
         "name": "1.飞速资源",
-        "status": 1,
+        "status": 0,
         "api_url": "aHR0cHM6Ly93d3cuZmVpc3V6eWFwaS5jb20vYXBpLnBocC9wcm92aWRlL3ZvZC8="
       },
       {
@@ -53,6 +53,11 @@
         "name": "9.无极网络",
         "status": 1,
         "api_url": "aHR0cHM6Ly9hcGkud3VqaW5hcGkubWUvYXBpLnBocC9wcm92aWRlL3ZvZC8="
+      },
+      {
+        "name": "10.白度网络",
+        "status": 1,
+        "api_url": "aHR0cHM6Ly9hcGkuYXBpYmR6eS5jb20vYXBpLnBocC9wcm92aWRlL3ZvZC8="
       }
     ]
   }
