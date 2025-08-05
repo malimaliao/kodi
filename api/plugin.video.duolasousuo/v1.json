@@ -10,9 +10,9 @@
     "note": "",
     "list": [
       {
-        "name": "1.飞速资源",
-        "status": 0,
-        "api_url": "aHR0cHM6Ly93d3cuZmVpc3V6eWFwaS5jb20vYXBpLnBocC9wcm92aWRlL3ZvZC8="
+        "name": "1.茅台资源",
+        "status": 1,
+        "api_url": "aHR0cHM6Ly9jYWlqaS5tYW90YWl6eS5jYy9hcGkucGhwL3Byb3ZpZGUvdm9kL2F0L2pvc24v"
       },
       {
         "name": "2.非凡网络",
@@ -20,9 +20,9 @@
         "api_url": "aHR0cHM6Ly9hcGkuZmZ6eWFwaS5jb20vYXBpLnBocC9wcm92aWRlL3ZvZC8="
       },
       {
-        "name": "3.铁塔网络",
+        "name": "3.量子网络",
         "status": 1,
-        "api_url": "aHR0cHM6Ly9hcGkudGlhbmtvbmdhcGkuY29tL2FwaS5waHAvcHJvdmlkZS92b2Qv"
+        "api_url": "aHR0cHM6Ly9jai5semlhcGkuY29tL2FwaS5waHAvcHJvdmlkZS92b2Qv"
       },
       {
         "name": "4.皇后网络",
